@@ -83,5 +83,75 @@ app.delete('/songs/:id', async (req, res) => {
   }
 });
 
+/* Statistics */
+app.get('/stats', async (req, res) => {
+  try {
+   
+    const totalSongs = await Song.countDocuments();
+
+    const totalArtists = (await Song.distinct('artist')).length;
+
+    const totalAlbumsAgg = await Song.aggregate([
+      { $group: { _id: { artist: "$artist", album: "$album" } } },
+      { $group: { _id: null, count: { $sum: 1 } } }
+    ]);
+    const totalAlbums = totalAlbumsAgg[0]?.count || 0;
+
+    const totalGenres = (await Song.distinct('genre')).length;
+
+    const songsByGenre = await Song.aggregate([
+      { $group: { _id: "$genre", count: { $sum: 1 } } },
+      { $sort: { _id: 1 } }
+    ]);
+
+    const songsAndAlbumsByArtist = await Song.aggregate([
+      {
+        $group: {
+          _id: "$artist",
+          songs: { $sum: 1 },
+          albums: { $addToSet: "$album" }
+        }
+      },
+      {
+        $project: {
+          artist: "$_id",
+          songs: 1,
+          albums: { $size: "$albums" }
+        }
+      },
+      { $sort: { artist: 1 } }
+    ]);
+
+    const songsByAlbum = await Song.aggregate([
+      {
+        $group: {
+          _id: { artist: "$artist", album: "$album" },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $project: {
+          artist: "$_id.artist",
+          album: "$_id.album",
+          count: 1
+        }
+      },
+      { $sort: { artist: 1, album: 1 } }
+    ]);
+
+    res.json({
+      totalSongs,
+      totalArtists: totalArtists,
+      totalAlbums,
+      totalGenres,
+      songsByGenre,
+      songsAndAlbumsByArtist,
+      songsByAlbum
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
