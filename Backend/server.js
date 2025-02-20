@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
 
+
 /* MongoDB Connection */
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/songs', {
   useNewUrlParser: true,
@@ -11,6 +12,13 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/songs', {
 })
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Could not connect to MongoDB', err));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 /* Song Schema and Model */
 const songSchema = new mongoose.Schema({
