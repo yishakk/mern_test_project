@@ -39,8 +39,15 @@ const songSlice = createSlice({
     createSongRequest: (state, _action: PayloadAction<Omit<Song, '_id'>>) => {
       state.loading = true;
     },
-    updateSongRequest: (state, _action: PayloadAction<Song>) => {
+    updateSongRequest: (state, action: PayloadAction<Song>) => {
       state.loading = true;
+    },
+    updateSongSuccess: (state, action: PayloadAction<Song>) => {
+      state.loading = false;
+      const index = state.songs.findIndex((song) => song._id === action.payload._id);
+      if (index !== -1) {
+        state.songs[index] = action.payload;
+      }
     },
     deleteSongRequest: (state, _action: PayloadAction<string>) => {
       state.loading = true;
