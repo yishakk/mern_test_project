@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { actions } from '../redux/slice';
 import styled from '@emotion/styled';
@@ -10,15 +10,28 @@ const FormContainer = styled.div`
   margin: 0 auto;
 `;
 
-const SongForm = ({ initialData, onCancel }: { initialData?: Song; onCancel: () => void }) => {
-  const dispatch = useDispatch();
-  const [formData, setFormData] = useState(initialData || {
-    title: '',
-    artist: '',
-    album: '',
-    genre: ''
-  });
+interface SongFormProps {
+  initialData?: Song | null;
+  onCancel: () => void; 
+}
 
+const SongForm = ({ initialData, onCancel }: SongFormProps) => {
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState<Omit<Song, '_id'>>(
+    initialData || {
+      title: '',
+      artist: '',
+      album: '',
+      genre: '',
+    }
+  );
+
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (initialData) {
@@ -26,7 +39,7 @@ const SongForm = ({ initialData, onCancel }: { initialData?: Song; onCancel: () 
     } else {
       dispatch(actions.createSongRequest(formData));
     }
-    onCancel();
+    onCancel(); 
   };
 
   return (
@@ -39,10 +52,35 @@ const SongForm = ({ initialData, onCancel }: { initialData?: Song; onCancel: () 
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           required
         />
-        {/* Add other fields similarly */}
+        <input
+          type="text"
+          placeholder="Artist"
+          value={formData.artist}
+          onChange={(e) => setFormData({ ...formData, artist: e.target.value })}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Album"
+          value={formData.album}
+          onChange={(e) => setFormData({ ...formData, album: e.target.value })}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Genre"
+          value={formData.genre}
+          onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
+          required
+        /><br />
+        <br />
         <button type="submit">{initialData ? 'Update' : 'Create'}</button>
-        <button type="button" onClick={onCancel}>Cancel</button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
       </form>
     </FormContainer>
   );
 };
+
+export default SongForm;

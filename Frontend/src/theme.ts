@@ -1,10 +1,10 @@
 export const theme = {
     colors: {
-      primary: '#1DB954',
-      secondary: '#191414',
-      background: '#f5f5f5',
-      text: '#333',
-      white: '#fff',
+      primary: '#845ec2',
+      secondary: '#00c9a7',
+      background: '#c4fcef',
+      text: '#4d8076',
+      white: '#4d8076',
     },
     spacing: {
       xs: '4px',
