@@ -5,6 +5,9 @@ import styled from '@emotion/styled';
 import { Song } from '../types/song';
 import SongForm from './SongForm';
 import { GenreFilter } from './GenereFilter';
+import { Button } from './Button';
+import { Card } from './Card';
+import { Container, Header, Footer } from './Layout';
 
 const Table = styled.table`
   width: 100%;
@@ -43,19 +46,22 @@ const SongList = () => {
     };
   
     return (
-      <div>
-        <button onClick={() => setShowForm(true)}>Add Song</button>
+      <Container>
+        <Header>
+        <h1>Music Library</h1>
+        <Button onClick={() => setShowForm(true)}>Add New Song</Button><br></br>
         {showForm && (
-          <SongForm
-            initialData={editSong} 
-            onCancel={handleCancel}
-          />
-        )}
-      </div>
+        <Card>
+          <SongForm initialData={editSong} onCancel={handleCancel} />
+        </Card>
+      )}
+      </Header>
+      </Container>
     );
   };
 
   return (
+    <Container>
     <div>
       <GenreFilter />
       <ParentComponent />
@@ -77,14 +83,15 @@ const SongList = () => {
               <td>{song.album}</td>
               <td>{song.genre}</td>
               <td>
-                <button onClick={() => handleEdit(song)}>Edit</button>
-                <button onClick={() => handleDelete(song._id)}>Delete</button>
+              <Button onClick={() => handleEdit(song)}>Edit</Button>
+              <Button onClick={() => handleDelete(song._id)}>Delete</Button>
               </td>
             </TableRow>
           ))}
         </tbody>
       </Table>
     </div>
+    </Container>
   );
 };
 
