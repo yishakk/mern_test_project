@@ -18,14 +18,14 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch(err => console.error('Could not connect to MongoDB', err));
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "localhost:3000" || "https://merntestproject.vercel.app");
+  res.header("Access-Control-Allow-Origin", "localhost:3000" || "https://mern-test-project-yishakk-yishakks-projects.vercel.app/");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
 
 const corsOptions = {
-  origin: ['https://merntestproject.vercel.app/'], // Add frontend domain
+  origin: ['https://merntestproject.vercel.app'], // Add frontend domain
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 };
