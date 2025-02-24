@@ -1,11 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { env } from 'process';
 import { actions } from './slice';
 import axios from 'axios';
 import { Song } from '../types/song';
 
 
-const API_BASE = env.API_URL || "https://mern-test-project-acwc.onrender.com";
+const API_BASE = process.env.API_URL || "https://mern-test-project-acwc.onrender.com";
 
 // Fetch Songs Saga
 function* fetchSongsSaga(action: ReturnType<typeof actions.fetchSongsRequest>) {
