@@ -7,6 +7,8 @@
         "dev": "nodemon server.js"
     },
     "dependencies": {
+        "cors": "^2.8.5",
+        "cours": "^1.0.0",
         "dotenv": "^16.4.7",
         "express": "^4.18.2",
         "mongoose": "^8.0.3"
