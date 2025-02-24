@@ -3,7 +3,8 @@ import { actions } from './slice';
 import axios from 'axios';
 import { Song } from '../types/song';
 
-const API_BASE = process.env.API_URL;
+
+const API_BASE = "https://mern-test-project-acwc.onrender.com";
 
 // Fetch Songs Saga
 function* fetchSongsSaga(action: ReturnType<typeof actions.fetchSongsRequest>) {
