@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,14 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
+const corsOptions = {
+  origin: ['https://merntestproject.vercel.app/'], // Add frontend domain
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 /* Song Schema and Model */
 const songSchema = new mongoose.Schema({
