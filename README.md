@@ -3,7 +3,7 @@
 A full-stack application for managing songs, built with **React**, **Redux**, **Express**, and **MongoDB**. The application allows users to create, read, update, and delete songs, as well as view detailed statistics about the music library.
 
 **Developed by:** [Yishak Kibru](https://github.com/yishakk)  
-**Live Demo:** [https://merntestproject-gj6ms3twg-yishakks-projects.vercel.app/](https://merntestproject-gj6ms3twg-yishakks-projects.vercel.app/)
+**Live Demo:** [https://merntestproject.vercel.app/](https://merntestproject.vercel.app/)
 
 ---
 
@@ -216,14 +216,6 @@ Contributions are welcome! Follow these steps:
    ```
 5. Open a pull request.
 
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
 ## Acknowledgments
 
 - **React**: For building a powerful and flexible UI.
@@ -236,4 +228,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 Enjoy managing your music library! 🎵
 
 **Developed by:** [Yishak Kibru](https://github.com/yishakk)  
-**Live Demo:** [https://merntestproject-gj6ms3twg-yishakks-projects.vercel.app/](https://merntestproject-gj6ms3twg-yishakks-projects.vercel.app/)
+**Live Demo:** [https://merntestproject.vercel.app/](https://merntestproject.vercel.app/)
