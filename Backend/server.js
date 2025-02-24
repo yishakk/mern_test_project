@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 });
 
 const corsOptions = {
-  origin: ['https://merntestproject.vercel.app/'], // Add frontend domain
+  origin: ['https://merntestproject.vercel.app'], // Add frontend domain
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 };
