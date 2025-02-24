@@ -4,7 +4,7 @@ services:
   backend:
     build: .
     ports:
-      - "3000:${PORT}"
+      - "8080:${PORT}"
     environment:
       - MONGODB_URI=${MONGODB_URI}
     depends_on:
