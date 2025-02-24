@@ -3,7 +3,7 @@ import { actions } from './slice';
 import axios from 'axios';
 import { Song } from '../types/song';
 
-const API_BASE = process.env.API_URL || 'http://localhost:8080';
+const API_BASE = process.env.API_URL || '127.0.0.1:3000';
 
 // Fetch Songs Saga
 function* fetchSongsSaga(action: ReturnType<typeof actions.fetchSongsRequest>) {
